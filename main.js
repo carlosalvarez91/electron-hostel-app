@@ -16,6 +16,8 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
+  //SQLite3
+  let server = require('./server/server.js')
 
   // Open the DevTools.
   win.webContents.openDevTools()
