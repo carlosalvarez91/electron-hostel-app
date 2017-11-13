@@ -1,4 +1,4 @@
-var sqlite3 = require('sqlite3').verbose();
+/*var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('db/database.sqlite3');
  
 db.serialize(function() {
@@ -15,4 +15,4 @@ db.serialize(function() {
   });
 });
  
-db.close();
+db.close();*/

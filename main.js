@@ -1,7 +1,8 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 const path = require('path')
 const url = require('url')
-//SQLite3
+
+//***** ----  SQLite3 ---- ******
 let server = require('./api.js')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -35,6 +36,34 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+
+//***** ---- Main menu ---- *****
+app.on('ready', function () {
+  new BrowserWindow();
+
+  const menuTemplate = [
+    {
+        label: 'Electron',
+        submenu: [
+            {
+                label: 'About ...',
+                click: () => {
+                    console.log('About Clicked');
+                }
+            }, {
+                type: 'separator'
+            }, {
+                label: 'Quit',
+                click: () => {
+                    app.quit();
+                }
+            }
+        ]
+    }
+];
+   const menu = Menu.buildFromTemplate(menuTemplate);
+   Menu.setApplicationMenu(menu);
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
