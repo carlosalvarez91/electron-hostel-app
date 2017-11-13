@@ -1,6 +1,8 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+//SQLite3
+let server = require('./api.js')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -16,8 +18,6 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-  //SQLite3
-  let server = require('./server/server.js')
 
   // Open the DevTools.
   win.webContents.openDevTools()
