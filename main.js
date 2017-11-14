@@ -11,6 +11,10 @@ win.loadURL(url.format({
    protocol:'file:',
    slashes:true
  }));
+ //Quit everything when main window closed
+ win.on('closed', ()=>{
+   app.quit();
+ })
 
  // build menu from menu template (see array line 38 'template')
  const mainMenu = Menu.buildFromTemplate(template);
