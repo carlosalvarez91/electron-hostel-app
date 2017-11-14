@@ -22,8 +22,8 @@ win.loadURL(url.format({
 let addWindow;
 function createAddWindow(){
   addWindow = new BrowserWindow({
-    width:200,
-    height:300,
+    width:300,
+    height:500,
     title: 'Check In'
   });
   addWindow.loadURL(url.format({
