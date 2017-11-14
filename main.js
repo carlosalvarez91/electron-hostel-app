@@ -35,10 +35,15 @@ function createAddWindow(){
      protocol:'file:',
      slashes:true
    }));
+   // Garbage collection
+   addWindow.on('close',()=>{
+     addWindow = null;
+   })
 }
 
 //menu template
   const template = [
+    {},
     {
       label:'New',
       submenu:[
@@ -51,13 +56,27 @@ function createAddWindow(){
        { label: 'Check Out'},
        { label: 'Refund'},
        { label: 'Total shift'},
-       { label: 'Weekly Total'},
-       { label: 'Quit',
+       { label: 'Weekly Total'}
+      ] 
+    },
+    {
+      label:'Help',
+      submenu:[
+       { label: 'Garda Number'},
+       { label: 'Pat Number'},
+       { label: 'Charlie Number'}
+      ] 
+    },
+    {
+     label: 'Window',
+      submenu:[
+        {
+          label:'Quit',
           accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
           click(){
             app.quit();
           }
         }
-      ] 
+      ]
     }
   ];
