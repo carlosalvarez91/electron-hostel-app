@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Check In</title>
+</head>
+<body>
+<div>
+    <form>
+        <div>
+            <label>Name</label>
+            <input type="text" id="name" autofocus>
+        </div>
+        <div>
+            <label>Surname</label>
+            <input type="text" id="surname">
+        </div>
+        <div>
+            <label>Room</label>
+            <select>
+                <option value="20">20</option>
+                <option value="20">21</option>
+                <option value="20">22</option>
+                <option value="20">23</option>
+            </select>
+        </div>
+        <div>
+            <label>Heads</label>
+            <input type="number" id="heads">
+        </div>
+        <div>
+            <label>Nights</label>
+            <input type="number" id="nights">
+        </div>
+        <div>
+            <label>Price</label>
+            <input type="text" id="price">
+        </div>
+        <div>
+            <label>Cash/Card</label>
+            <select>
+                <option value="cash">Cash</option>
+                <option value="card">Card</option>
+            </select>
+        </div>
+        <button type="submit" id='done'>Done</button>
+        <button>Cancel</button>
+    </form>
+</div>
+</body>
+<script>
+    require('./create-receipt-renderer.js');
+</script>
+</html>

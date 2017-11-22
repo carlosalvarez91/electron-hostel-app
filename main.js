@@ -33,7 +33,7 @@ function createAddWindowCheckIn(){
     title: 'Check In'
   });
   addWindow.loadURL(url.format({
-     pathname: path.join(__dirname, 'receipt.html'),
+     pathname: path.join(__dirname, 'check-in.html'),
      protocol:'file:',
      slashes:true
    }));
@@ -44,6 +44,8 @@ function createAddWindowCheckIn(){
 }
 
 // Print to PDF
+//why in main.js? diference between main process and renderer process
+//https://github.com/electron/electron/blob/master/docs/tutorial/quick-start.md
 ipcMain.on('print-to-pdf', function(event){
   const pdfPath = path.join(os.tmpdir(), 'print.pdf');
   const win = BrowserWindow.fromWebContents(event.sender);
