@@ -42,25 +42,6 @@ function createAddWindowCheckIn(){
      addWindow = null;
    })
 }
-
-// Print to PDF
-//why in main.js? diference between main process and renderer process
-//https://github.com/electron/electron/blob/master/docs/tutorial/quick-start.md
-ipcMain.on('print-to-pdf', function(event){
-  const pdfPath = path.join(os.tmpdir(), 'print.pdf');
-  const win = BrowserWindow.fromWebContents(event.sender);
-
-  win.webContents.printToPDF({}, function(error,data){
-    if(error) return console.log(error.message);
-
-    fs.writeFile(pdfPath, data, function(error){
-      if(error)return console.log(err.message);
-      shell.openExternal('file://' + pdfPath);
-      event.sender.send('wrote-pdf', pdfPath);
-    })
-  })
-});
-
 //Create 'Help' window
 function createAddWindowHelp(){
   addWindow = new BrowserWindow({
@@ -117,6 +98,12 @@ function createAddWindowHelp(){
             app.quit();
           }
         }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        {role: 'toggledevtools'}
       ]
     }
   ];
