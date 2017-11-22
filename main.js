@@ -40,6 +40,22 @@ function createAddWindow(){
      addWindow = null;
    })
 }
+function createAddWindowHelp(){
+  addWindow = new BrowserWindow({
+    width:300,
+    height:500,
+    title: 'Useful Numbers'
+  });
+  addWindow.loadURL(url.format({
+     pathname: path.join(__dirname, 'help.html'),
+     protocol:'file:',
+     slashes:true
+   }));
+   // Garbage collection
+   addWindow.on('close',()=>{
+     addWindow = null;
+   })
+}
 
 //menu template
   const template = [
@@ -62,9 +78,11 @@ function createAddWindow(){
     {
       label:'Help',
       submenu:[
-       { label: 'Garda Number'},
-       { label: 'Pat Number'},
-       { label: 'Charlie Number'}
+       { label: 'Useful Numbers',
+          click(){
+          createAddWindowHelp();
+          }
+        }
       ] 
     },
     {
