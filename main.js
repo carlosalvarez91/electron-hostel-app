@@ -33,7 +33,7 @@ function createAddWindowCheckIn(){
     title: 'Check In'
   });
   addWindow.loadURL(url.format({
-     pathname: path.join(__dirname, 'check-in.html'),
+     pathname: path.join(__dirname, '/check-in/check-in.html'),
      protocol:'file:',
      slashes:true
    }));
