@@ -1,6 +1,8 @@
-const {app, BrowserWindow, Menu} = require('electron');
+const {app, BrowserWindow, Menu, ipcMain, shell} = require('electron');
 const url = require('url');
 const path = require('path');
+const fs = require('fs');
+const os = require('os');
 
 //App on Ready
 let win
@@ -16,15 +18,15 @@ win.loadURL(url.format({
    app.quit();
  })
 
- // build menu from menu template (see array line 38 'template')
+ //Build menu from menu template (see array line 38 'template')
  const mainMenu = Menu.buildFromTemplate(template);
  Menu.setApplicationMenu(mainMenu);
 });
 
 
-// Handle createAddWindow
+// Create 'CheckIn' window
 let addWindow;
-function createAddWindow(){
+function createAddWindowCheckIn(){
   addWindow = new BrowserWindow({
     width:300,
     height:500,
@@ -40,6 +42,24 @@ function createAddWindow(){
      addWindow = null;
    })
 }
+
+// Print to PDF
+ipcMain.on('print-to-pdf', function(event){
+  const pdfPath = path.join(os.tmpdir(), 'print.pdf');
+  const win = BrowserWindow.fromWebContents(event.sender);
+
+  win.webContents.printToPDF({}, function(error,data){
+    if(error) return console.log(error.message);
+
+    fs.writeFile(pdfPath, data, function(error){
+      if(error)return console.log(err.message);
+      shell.openExternal('file://' + pdfPath);
+      event.sender.send('wrote-pdf', pdfPath);
+    })
+  })
+});
+
+//Create 'Help' window
 function createAddWindowHelp(){
   addWindow = new BrowserWindow({
     width:300,
@@ -57,7 +77,7 @@ function createAddWindowHelp(){
    })
 }
 
-//menu template
+//Main menu template
   const template = [
     {},
     {
@@ -66,7 +86,7 @@ function createAddWindowHelp(){
        { 
          label: 'Check In',
          click(){
-           createAddWindow();
+           createAddWindowCheckIn();
          }
         },
        { label: 'Check Out'},

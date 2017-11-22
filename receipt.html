@@ -45,8 +45,13 @@
                 <option value="card">Card</option>
             </select>
         </div>
-        <button type="submit">Print</button>
+        <label id='pdf-path'></label>
+        <button type="submit" id='print-pdf'>Done</button>
+        <button>Cancel</button>
     </form>
 </div>
 </body>
+<script>
+    require('./print-pdf-renderer.js');
+</script>
 </html>
