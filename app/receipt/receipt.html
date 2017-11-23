@@ -9,12 +9,21 @@
   <body>
   <div class="container">
     <img class="background-image"src="backpackers-template.jpg">    
-    <h5>data</h5>
-    <label id='pdf-path'></label>
+    <!--load here all checkin data-->
+    <div class="container-data">
+        <label id='output-name'></label>
+        <label id='output-surname'></label>
+        <label id='output-room'></label>
+        <label id='output-heads'></label>
+        <label id='output-nights'></label>
+        <label id='output-price'></label>
+        <label id='output-cash-card'></label>
+    </div>
+
     <button type="submit" id='print-pdf'>Print</button>
   </div>
   </body>
   <script>
-    require('./print-pdf-renderer.js');
+    require('./receipt-renderer.js');
 </script>
 </html>

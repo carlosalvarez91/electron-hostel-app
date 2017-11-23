@@ -6,9 +6,10 @@
      width:auto;
      position: relative;
 }
-h5{
+.container-data{
     position: absolute;
-    top:200px;
+    bottom: 100px;
+    text-align:justify;
 }
 #print-pdf{
     position: absolute;

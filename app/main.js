@@ -18,7 +18,7 @@ win.loadURL(url.format({
    app.quit();
  })
 
- //Build menu from menu template (see array line 38 'template')
+ //Build menu from menu template (see const template array at the bottom)
  const mainMenu = Menu.buildFromTemplate(template);
  Menu.setApplicationMenu(mainMenu);
 });
@@ -42,6 +42,14 @@ function createAddWindowCheckIn(){
      addWindow = null;
    })
 }
+
+//*** 2.Listen for data from check-in-renderer inputs when submit
+ipcMain.on('check-in-input', (e,{name, surname, room, heads, nights, price, cashcard})=>{
+  console.log({name, surname, room, heads, nights, price, cashcard});
+//*** 3. Store this data  in a global variable
+  global.checkInData = {name, surname, room, heads, nights, price, cashcard};
+})
+
 //Create 'Help' window
 function createAddWindowHelp(){
   addWindow = new BrowserWindow({
@@ -62,7 +70,7 @@ function createAddWindowHelp(){
 
 //Main menu template
   const template = [
-    {},
+    {},//only for mac
     {
       label:'New',
       submenu:[
@@ -103,7 +111,12 @@ function createAddWindowHelp(){
     {
       label: 'View',
       submenu: [
-        {role: 'toggledevtools'}
+        {
+          role: 'toggledevtools'
+        },
+        {
+          label: 'Reload'
+        }
       ]
     }
   ];
