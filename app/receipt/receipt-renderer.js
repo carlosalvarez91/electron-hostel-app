@@ -12,7 +12,7 @@ document.getElementById('output-room').innerHTML = data['room'];
 document.getElementById('output-heads').innerHTML = data['heads'];
 document.getElementById('output-nights').innerHTML = data['nights'];
 document.getElementById('output-price').innerHTML = data['price'];
-document.getElementById('output-cash-card').innerHTML = data['cashcard'];
+document.getElementById('output-payment').innerHTML = data['payment'];
 
 // 'print' button
 const printPDFButton = document.getElementById('print-pdf');

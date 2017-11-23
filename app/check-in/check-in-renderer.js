@@ -13,9 +13,9 @@ function submitCheckIn(e){
     const heads = document.querySelector('#heads').value;
     const nights = document.querySelector('#nights').value;
     const price = document.querySelector('#price').value;
-    const cashcard = document.querySelector('#cash-card').value;
+    const payment = document.querySelector('#payment').value;
     //***1.send form input data to main process
-    ipcRenderer.send('check-in-input',{name, surname, room, heads, nights, price, cashcard});
+    ipcRenderer.send('check-in-input',{name, surname, room, heads, nights, price, payment});
 
 }
 //'Done' button

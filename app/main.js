@@ -44,10 +44,10 @@ function createAddWindowCheckIn(){
 }
 
 //*** 2.Listen for data from check-in-renderer inputs when submit
-ipcMain.on('check-in-input', (e,{name, surname, room, heads, nights, price, cashcard})=>{
-  console.log({name, surname, room, heads, nights, price, cashcard});
+ipcMain.on('check-in-input', (e,{name, surname, room, heads, nights, price, payment})=>{
+  console.log({name, surname, room, heads, nights, price, payment});
 //*** 3. Store this data  in a global variable
-  global.checkInData = {name, surname, room, heads, nights, price, cashcard};
+  global.checkInData = {name, surname, room, heads, nights, price, payment};
 })
 
 //Create 'Help' window
