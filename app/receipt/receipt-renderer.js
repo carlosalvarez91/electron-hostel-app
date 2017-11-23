@@ -21,3 +21,8 @@ printPDFButton.addEventListener('click', function(event){
     printPDFButton.style.visibility = "hidden"; //hide button before print window
     window.print();
 })
+//'Cancel' button
+const cancelButton = document.getElementById('cancel');
+cancelButton.addEventListener('click', function(event){
+    window.close();
+})

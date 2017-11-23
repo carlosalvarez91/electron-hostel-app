@@ -25,4 +25,9 @@ doneButton.addEventListener('click', function(event){
    let win = new BrowserWindow({width: 595, height: 842}) // A4
     win.loadURL(`file://${__dirname}/../receipt/receipt.html`)
 })
+//'Cancel' button
+const cancelButton = document.getElementById('cancel');
+cancelButton.addEventListener('click', function(event){
+    window.close();
+})
 

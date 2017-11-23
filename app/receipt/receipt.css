@@ -20,8 +20,13 @@
     left:100px;
     text-align:justify;
 }
-#print-pdf{
+#print-pdf, #cancel{
     position: absolute;
     bottom: 60px;
+}
+#print-pdf{
     left:100px;
+}
+#cancel{
+    left:170px;
 }
