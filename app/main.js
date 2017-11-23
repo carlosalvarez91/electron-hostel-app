@@ -1,13 +1,11 @@
-const {app, BrowserWindow, Menu, ipcMain, shell} = require('electron');
+const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const url = require('url');
 const path = require('path');
-const fs = require('fs');
-const os = require('os');
 
 //App on Ready
 let win
 app.on('ready', ()=>{
-win = new BrowserWindow({width: 800, height: 600});
+win = new BrowserWindow({width: 900, height: 700});
 win.loadURL(url.format({
    pathname: path.join(__dirname, 'index.html'),
    protocol:'file:',
@@ -29,7 +27,7 @@ let addWindow;
 function createAddWindowCheckIn(){
   addWindow = new BrowserWindow({
     width:300,
-    height:500,
+    height:600,
     title: 'Check In'
   });
   addWindow.loadURL(url.format({
@@ -45,7 +43,6 @@ function createAddWindowCheckIn(){
 
 //date
 const date = new Date().toUTCString();
-console.log(date);
 
 //*** 2.Listen for data from check-in-renderer inputs when submit
 ipcMain.on('check-in-input', (e,{name, surname, room, heads, nights, price, payment})=>{
