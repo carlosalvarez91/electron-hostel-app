@@ -11,4 +11,32 @@
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
   </body>
+  <script>
+  var sqlite3 = require('sqlite3').verbose();
+  var db = new sqlite3.Database('app/db/database.sqlite3');
+  
+  db.serialize(function() {
+    //db.run("CREATE TABLE lorem (info TEXT)");
+    db.run("DROP TABLE IF EXISTS bookings")
+    db.run("CREATE TABLE bookings (name STRING)");
+    
+    //var stmt = db.prepare("INSERT INTO lorem VALUES (?)");
+    var stmt = db.prepare("INSERT INTO bookings VALUES ('carlos')");
+    //for (var i = 0; i < 10; i++) {
+    //    stmt.run("Ipsum " + i);
+    //}
+    stmt.finalize();
+  
+    db.each("SELECT rowid AS id, name FROM bookings", function(err, row) {
+        console.log(row.id + ": " + row.name);
+    });
+    /*  
+    db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
+      console.log(row.id + ": " + row.info);
+    });
+    */
+  });
+  
+  db.close();
+  </script>
 </html>

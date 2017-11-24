@@ -46,6 +46,8 @@ ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price
   console.log({date, name, surname, room, heads, nights, price, payment});
 //*** 3. Store this data  in a global variable
   global.checkInData = {date, name, surname, room, heads, nights, price, payment};
+
+  //insert checkInData into the DB
 })
 
 //Create 'Help' window
