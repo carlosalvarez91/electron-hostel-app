@@ -18,7 +18,9 @@ document.getElementById('output-payment').innerHTML = data['payment'];
 // 'print' button
 const printPDFButton = document.getElementById('print-pdf');
 printPDFButton.addEventListener('click', function(event){
-    printPDFButton.style.visibility = "hidden"; //hide button before print window
+    //hide buttons before print window
+    printPDFButton.style.visibility = "hidden";
+    cancelButton.style.visibility = "hidden";
     window.print();
 })
 //'Cancel' button

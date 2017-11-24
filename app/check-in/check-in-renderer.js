@@ -7,6 +7,7 @@ form.addEventListener('submit', submitCheckIn);
 
 function submitCheckIn(e){
     e.preventDefault();
+    //inputs
     const name = document.querySelector('#name').value;
     const surname = document.querySelector('#surname').value;
     const room = document.querySelector('#room').value;
@@ -14,20 +15,25 @@ function submitCheckIn(e){
     const nights = document.querySelector('#nights').value;
     const price = document.querySelector('#price').value;
     const payment = document.querySelector('#payment').value;
-    //***1.send form input data to main process
-    ipcRenderer.send('check-in-input',{name, surname, room, heads, nights, price, payment});
+    const date = new Date().toUTCString();//date
+    //if no value
+    if( name == '' || surname == '' || heads == '' || nights == '' || price == ''){ 
+        alert('fill up all fields');
+        return;
+    }else{
 
-}
-//'Done' button
-const doneButton = document.getElementById('done');
-doneButton.addEventListener('click', function(event){
+    //***1.send form input data to main process
+    ipcRenderer.send('check-in-input',{date, name, surname, room, heads, nights, price, payment});
+    
     //***4.open reciept window
-   let win = new BrowserWindow({width: 595, height: 842}) // A4
+    let win = new BrowserWindow({width: 595, height: 842}) // A4
     win.loadURL(`file://${__dirname}/../receipt/receipt.html`)
-})
+
+    }
+}
 //'Cancel' button
 const cancelButton = document.getElementById('cancel');
 cancelButton.addEventListener('click', function(event){
     window.close();
-})
+});
 

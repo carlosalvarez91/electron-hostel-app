@@ -41,11 +41,8 @@ function createAddWindowCheckIn(){
    })
 }
 
-//date
-const date = new Date().toUTCString();
-
 //*** 2.Listen for data from check-in-renderer inputs when submit
-ipcMain.on('check-in-input', (e,{name, surname, room, heads, nights, price, payment})=>{
+ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price, payment})=>{
   console.log({date, name, surname, room, heads, nights, price, payment});
 //*** 3. Store this data  in a global variable
   global.checkInData = {date, name, surname, room, heads, nights, price, payment};
