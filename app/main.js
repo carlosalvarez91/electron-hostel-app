@@ -1,7 +1,8 @@
 const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const url = require('url');
 const path = require('path');
-
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('app/db/database.sqlite3');
 //App on Ready
 let win
 app.on('ready', ()=>{
@@ -46,8 +47,9 @@ ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price
   console.log({date, name, surname, room, heads, nights, price, payment});
 //*** 3. Store this data  in a global variable
   global.checkInData = {date, name, surname, room, heads, nights, price, payment};
-
   //insert checkInData into the DB
+  db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?)",[date, name, surname, room, heads, nights, price, payment]);
+
 })
 
 //Create 'Help' window

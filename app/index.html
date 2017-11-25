@@ -16,25 +16,18 @@
   var db = new sqlite3.Database('app/db/database.sqlite3');
   
   db.serialize(function() {
-    //db.run("CREATE TABLE lorem (info TEXT)");
-    db.run("DROP TABLE IF EXISTS bookings")
-    db.run("CREATE TABLE bookings (name STRING)");
     
-    //var stmt = db.prepare("INSERT INTO lorem VALUES (?)");
-    var stmt = db.prepare("INSERT INTO bookings VALUES ('carlos')");
-    //for (var i = 0; i < 10; i++) {
-    //    stmt.run("Ipsum " + i);
-    //}
-    stmt.finalize();
+    //db.run("DROP TABLE IF EXISTS bookings");
+    //db.run("CREATE TABLE bookings (name STRING, surname STRING, room STRING, heads NUMERIC, nights NUMERIC, price NUMERIC, payment STRING)");
+    
+
+    //var stmt = db.prepare("INSERT INTO bookings VALUES ('carlos', 'alvarez', 'TV room', '2', '1', '30', 'cash')");
+
+    //stmt.finalize();
   
-    db.each("SELECT rowid AS id, name FROM bookings", function(err, row) {
-        console.log(row.id + ": " + row.name);
+    db.each("SELECT rowid AS id, name, surname , room , heads , nights , price , payment  FROM bookings", function(err, row) {
+        console.log(row.id + ": " + row.name + row.surname + row.room + row.heads + row.nights + row.price + row.payment );
     });
-    /*  
-    db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
-      console.log(row.id + ": " + row.info);
-    });
-    */
   });
   
   db.close();
