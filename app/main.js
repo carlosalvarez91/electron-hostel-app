@@ -48,7 +48,7 @@ ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price
 //*** 3. Store this data  in a global variable
   global.checkInData = {date, name, surname, room, heads, nights, price, payment};
   //insert checkInData into the DB
-  db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?)",[date, name, surname, room, heads, nights, price, payment]);
+  db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?)",[date, name, surname, room, heads, nights, price, payment]);
 
 })
 
