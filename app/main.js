@@ -6,6 +6,7 @@ var db = new sqlite3.Database('app/db/database.sqlite3');
 //App on Ready
 let win
 app.on('ready', ()=>{
+//main window
 win = new BrowserWindow({width: 900, height: 700});
 win.loadURL(url.format({
    pathname: path.join(__dirname, 'index.html'),
@@ -45,11 +46,13 @@ function createAddWindowCheckIn(){
 //*** 2.Listen for data from check-in-renderer inputs when submit
 ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price, payment})=>{
   console.log({date, name, surname, room, heads, nights, price, payment});
-//*** 3. Store this data  in a global variable
+  //send it to the mainWindow
+  win.webContents.send('check-in-input',{date, name, surname, room, heads, nights, price, payment});
+//*** 3. Store this data  in a global variable to get in in the receipt
   global.checkInData = {date, name, surname, room, heads, nights, price, payment};
   //insert checkInData into the DB
   db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?)",[date, name, surname, room, heads, nights, price, payment]);
-
+  //addWindow.close();
 })
 
 //Create 'Help' window

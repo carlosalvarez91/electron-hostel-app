@@ -11,19 +11,61 @@
     Chrome <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
   </body>
-  <ul id="allReceipts"></ul>
+  <!--<ul id="allReceipts"></ul>-->
+  <table id="table">
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Room</th>
+        <th>Heads</th>
+        <th>Nights</th>
+        <th>Price</th>
+        <th>Payment</th>
+      </tr>
+  </table>
   <script>
-  var sqlite3 = require('sqlite3').verbose();
-  var db = new sqlite3.Database('app/db/database.sqlite3');
-  
+  const electron = require('electron');
+  const{ipcRenderer} = electron;
+  //render the checkIn input data into a table
+  ipcRenderer.on('check-in-input',(e,{date, name, surname, room, heads, nights, price, payment})=>{
+    var newRow = `<tr>
+                  <td>${date}</td>
+                  <td>${name}</td>
+                  <td>${surname}</td>
+                  <td>${room}</td>
+                  <td>${heads}</td>
+                  <td>${nights}</td>
+                  <td>${price}</td>
+                  <td>${payment}</td>
+                </tr>`;
+    document.getElementById("table").innerHTML += newRow;
+  })
+
+  //render from db
+  const sqlite3 = require('sqlite3').verbose();
+  const db = new sqlite3.Database('app/db/database.sqlite3');
   db.serialize(function() {
 
+    /* Render all receipts
     db.each("SELECT rowid AS id, date, name, surname , room , heads , nights , price , payment  FROM bookings", function(err, row) {
-
     var node = document.createElement("LI");
     var textnode = document.createTextNode(row.date + row.name + row.surname + row.room + row.heads + row.nights + row.price + row.payment);
     node.appendChild(textnode);
     document.getElementById("allReceipts").appendChild(node);
+    });*/
+
+    // sum card
+    db.each("SELECT SUM(price) FROM bookings WHERE payment = 'card' ", function(err, totalCard) {
+      console.log(totalCard["SUM(price)"]);
+    });
+    //sum cash
+    db.each("SELECT SUM(price) FROM bookings WHERE payment = 'cash' ", function(err, totalCash) {
+      console.log(totalCash["SUM(price)"]);
+    });
+    //sum total
+    db.each("SELECT SUM(price) FROM bookings", function(err, total) {
+    console.log(total["SUM(price)"]);
     });
   });
   </script>
