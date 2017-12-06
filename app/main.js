@@ -43,15 +43,20 @@ function createAddWindowCheckIn(){
    })
 }
 
+let receptionist; //global
+ipcMain.on('login', (e,receptionistName)=>{
+receptionist = receptionistName;
+})
 //*** 2.Listen for data from check-in-renderer inputs when submit
 ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price, payment})=>{
   console.log({date, name, surname, room, heads, nights, price, payment});
+  console.log('receptionist: '+receptionist);
   //send it to the mainWindow
-  win.webContents.send('check-in-input',{date, name, surname, room, heads, nights, price, payment});
+  win.webContents.send('check-in-input',{date, name, surname, room, heads, nights, price, payment, receptionist});
 //*** 3. Store this data  in a global variable to get in in the receipt
-  global.checkInData = {date, name, surname, room, heads, nights, price, payment};
+  global.checkInData = {date, name, surname, room, heads, nights, price, payment, receptionist};
   //insert checkInData into the DB
-  db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?)",[date, name, surname, room, heads, nights, price, payment]);
+  db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?,?)",[date, name, surname, room, heads, nights, price, payment, receptionist]);
   //addWindow.close();
 })
 

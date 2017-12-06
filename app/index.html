@@ -10,7 +10,7 @@
     <div id="loginScreen">
         <form>
             <div class="form-group">
-                <label>Name</label>
+                <label>Receptionist Name:</label>
                 <input type="text" class="form-control" id="receptionistName">
             </div>
             <div class="form-actions">
@@ -18,7 +18,9 @@
             </div>
         </form>
     </div>
-  <h2>Hello <span id="greeting"></span></h2>  
+
+      <h2>Hello <span id="greeting"></span></h2>  
+      <button onclick="logout()"id="logout" class="btn btn-large btn-negative">Log Out</button>
   <table id="tableAll">
       <tr>
         <th>Date</th>
@@ -39,11 +41,21 @@
     e.preventDefault();
     let receptionistName = document.querySelector('#receptionistName').value;
     if(receptionistName != ''){
+      // New local storage when press login and store temporary all receiots until press Logout.
+      // at the same time save in sqlite permanent all receipts for the  weekly total.
+      // store receptionistNAme as a global var 
       document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('logout').style.display = 'block';
       document.getElementById('greeting').innerHTML = receptionistName;
+
+      ipcRenderer.send('login',receptionistName);
     }else{
-      console.log('write somth')
+      console.log('Write your name madafakaa!!')
     }
+  }
+  //logout
+  function logout(e){
+    document.getElementById('loginScreen').style.display = 'block';
   }
 </script>
   <script>

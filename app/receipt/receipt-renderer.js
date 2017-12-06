@@ -14,6 +14,7 @@ document.getElementById('output-heads').innerHTML = data['heads'];
 document.getElementById('output-nights').innerHTML = data['nights'];
 document.getElementById('output-price').innerHTML = data['price'];
 document.getElementById('output-payment').innerHTML = data['payment'];
+document.getElementById('receptionist').innerHTML = data['receptionist'];
 
 // 'print' button
 const printPDFButton = document.getElementById('print-pdf');

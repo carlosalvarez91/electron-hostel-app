@@ -1,6 +1,6 @@
 const electron = require('electron');
 const {BrowserWindow} = require('electron').remote;
-const {ipcRenderer} = require('electron'); 
+const {ipcRenderer, remote} = require('electron'); 
 
 const form = document.querySelector('form');
 form.addEventListener('submit', submitCheckIn);

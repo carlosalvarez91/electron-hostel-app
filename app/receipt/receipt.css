@@ -16,9 +16,15 @@
 }
 .container-data{
     position: absolute;
-    top: 100px;
+    top: 50px;
     left:100px;
     text-align:justify;
+}
+h5{
+    margin-top:10px !important;
+}
+label{
+    margin-bottom: 0px !important;
 }
 #print-pdf, #cancel{
     position: absolute;
