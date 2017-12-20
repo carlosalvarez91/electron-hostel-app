@@ -4,12 +4,12 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('app/db/database.sqlite3');
 db.serialize(function() {
   // Render all receipts from db WHERE receptonist = 'theOneLoggedIn.toLowerCase()' AND between 'pressedLogIn time' and 'pressedLogOut time'
-  db.each("SELECT rowid AS id, date, name, surname , room , heads , nights , price , payment  FROM bookings", function(err, row) {
+  db.each("SELECT rowid AS id, date, name, surname , room , heads , nights , price , payment, receptionist  FROM bookings", function(err, row) {
   var a =[];
   a.push(row);
   for (var i = 0; i < a.length; i++) {
       var tr = document.createElement("tr")
-      for (var key of ['date', 'name', 'surname', 'room', 'heads', 'nights', 'price', 'payment']) {
+      for (var key of ['date', 'name', 'surname', 'room', 'heads', 'nights', 'price', 'payment', 'receptionist']) {
         var td = document.createElement("td")
         td.innerHTML = a[i][key]
         tr.appendChild(td)
