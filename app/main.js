@@ -42,10 +42,15 @@ function createAddWindowCheckIn(){
      addWindow = null;
    })
 }
-
+//IPCMains: 
 let receptionist; //global
 ipcMain.on('login', (e,receptionistName)=>{
 receptionist = receptionistName;
+console.log('current receiptionist : '+receptionist);
+})
+ipcMain.on('logout',(e)=>{
+receptionist = ''; // destroy receptionist var
+console.log('current receiptionist : '+receptionist)
 })
 //*** 2.Listen for data from check-in-renderer inputs when submit
 ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price, payment})=>{
@@ -59,6 +64,24 @@ ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price
   db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?,?)",[date, name, surname, room, heads, nights, price, payment, receptionist]);
   //addWindow.close();
 })
+
+//Create 'Total' window
+function createAddWindowTotal(){
+  addWindow = new BrowserWindow({
+    width:800,
+    height:600,
+    title: 'Total'
+  });
+  addWindow.loadURL(url.format({
+    pathname:path.join(__dirname,'/total/total.html'),
+    protocol:'file:',
+    slashes:true
+  }))
+    // Garbage collection
+    addWindow.on('close',()=>{
+    addWindow = null;
+  })
+}
 
 //Create 'Help' window
 function createAddWindowHelp(){
@@ -89,11 +112,15 @@ function createAddWindowHelp(){
          click(){
            createAddWindowCheckIn();
          }
-        },
+       },/*
        { label: 'Check Out'},
        { label: 'Refund'},
        { label: 'Total shift'},
-       { label: 'Weekly Total'}
+       { label: 'Weekly Total'},*/
+       { label: 'Total',
+        click(){
+        createAddWindowTotal();
+      }}
       ] 
     },
     {
