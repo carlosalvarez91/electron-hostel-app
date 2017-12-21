@@ -5,12 +5,13 @@
   "main": "app/main.js",
   "scripts": {
     "start": "electron .",
-    "rebuild":"electron-rebuild -f -w sqlite3"
+    "rebuild": "electron-rebuild -f -w sqlite3"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "electron": "^1.7.9",
+    "moment": "^2.20.1",
     "sqlite3": "^3.1.13"
   },
   "devDependencies": {

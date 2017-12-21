@@ -29,7 +29,7 @@ function logout(e){
   //create new table
   //Build an array containing Title records.
   var titles = new Array();
-  titles.push(["Date", "Name", "Surname","Room","Heads","Nights","Price","Payment"]);
+  titles.push(["Date", "Hour","Name", "Surname","Room","Heads","Nights","Price","Payment"]);
 
   //Create a HTML Table element.
   var table = document.createElement("TABLE");
@@ -51,9 +51,10 @@ function logout(e){
   table.setAttribute("id", "tableAll");
 }
 //render the checkIn input data into a table
-ipcRenderer.on('check-in-input',(e,{date, name, surname, room, heads, nights, price, payment})=>{
+ipcRenderer.on('check-in-input',(e,{date,hour, name, surname, room, heads, nights, price, payment})=>{
   var newRow = `<tr>
                 <td>${date}</td>
+                <td>${hour}</td>
                 <td>${name}</td>
                 <td>${surname}</td>
                 <td>${room}</td>

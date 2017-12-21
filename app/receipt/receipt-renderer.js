@@ -7,6 +7,7 @@ console.log(data); //=> object
 //console.log(data['name']);
 //and print that data in the receipt: 
 document.getElementById('output-date').innerHTML = data['date'];
+document.getElementById('output-hour').innerHTML = data['hour'];
 document.getElementById('output-name').innerHTML = data['name'];
 document.getElementById('output-surname').innerHTML = data['surname'];
 document.getElementById('output-room').innerHTML = data['room'];

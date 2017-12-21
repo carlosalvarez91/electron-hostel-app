@@ -1,6 +1,7 @@
 const electron = require('electron');
 const {BrowserWindow} = require('electron').remote;
 const {ipcRenderer, remote} = require('electron'); 
+const moment = require('moment');
 
 const form = document.querySelector('form');
 form.addEventListener('submit', submitCheckIn);
@@ -15,7 +16,10 @@ function submitCheckIn(e){
     const nights = document.querySelector('#nights').value;
     const price = document.querySelector('#price').value;
     const payment = document.querySelector('#payment').value;
-    const date = new Date().toUTCString();//date
+    const date = moment().subtract(10, 'days').calendar();//Date
+    const hour = moment().format('LTS');//Hour
+
+    
     //if no value
     if( name == '' || surname == '' || heads == '' || nights == '' || price == ''){ 
         alert('fill up all fields');
@@ -23,7 +27,7 @@ function submitCheckIn(e){
     }else{
 
     //***1.send form input data to main process
-    ipcRenderer.send('check-in-input',{date, name, surname, room, heads, nights, price, payment});
+    ipcRenderer.send('check-in-input',{date, hour, name, surname, room, heads, nights, price, payment});
     
     //***4.open reciept window
     let win = new BrowserWindow({width: 595, height: 842}) // A4

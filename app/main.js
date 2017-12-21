@@ -53,15 +53,15 @@ receptionist = ''; // destroy receptionist var
 console.log('current receiptionist : '+receptionist)
 })
 //*** 2.Listen for data from check-in-renderer inputs when submit
-ipcMain.on('check-in-input', (e,{date, name, surname, room, heads, nights, price, payment})=>{
-  console.log({date, name, surname, room, heads, nights, price, payment});
+ipcMain.on('check-in-input', (e,{date, hour, name, surname, room, heads, nights, price, payment})=>{
+  console.log({date, hour, name, surname, room, heads, nights, price, payment});
   console.log('receptionist: '+receptionist);
   //send it to the mainWindow
-  win.webContents.send('check-in-input',{date, name, surname, room, heads, nights, price, payment, receptionist});
+  win.webContents.send('check-in-input',{date,hour, name, surname, room, heads, nights, price, payment, receptionist});
 //*** 3. Store this data  in a global variable to get in in the receipt
-  global.checkInData = {date, name, surname, room, heads, nights, price, payment, receptionist};
+  global.checkInData = {date,hour, name, surname, room, heads, nights, price, payment, receptionist};
   //insert checkInData into the DB
-  db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?,?)",[date, name, surname, room, heads, nights, price, payment, receptionist]);
+  db.run("INSERT INTO bookings VALUES (?,?,?,?,?,?,?,?,?,?)",[date, hour, name, surname, room, heads, nights, price, payment, receptionist]);
   //addWindow.close();
 })
 
