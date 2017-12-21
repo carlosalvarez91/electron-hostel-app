@@ -23,25 +23,6 @@ win.loadURL(url.format({
  Menu.setApplicationMenu(mainMenu);
 });
 
-
-// Create 'CheckIn' window
-let addWindow;
-function createAddWindowCheckIn(){
-  addWindow = new BrowserWindow({
-    width:300,
-    height:600,
-    title: 'Check In'
-  });
-  addWindow.loadURL(url.format({
-     pathname: path.join(__dirname, '/check-in/check-in.html'),
-     protocol:'file:',
-     slashes:true
-   }));
-   // Garbage collection
-   addWindow.on('close',()=>{
-     addWindow = null;
-   })
-}
 //IPCMains: 
 let receptionist; //global
 ipcMain.on('login', (e,receptionistName)=>{
@@ -65,6 +46,29 @@ ipcMain.on('check-in-input', (e,{date, hour, name, surname, room, heads, nights,
   //addWindow.close();
 })
 
+// Create 'CheckIn' window
+let addWindow;
+function createAddWindowCheckIn(){
+  //Log in before do a CheckIn
+  if(!receptionist){
+    console.log('Log in first');
+    return;
+  }
+  addWindow = new BrowserWindow({
+    width:300,
+    height:600,
+    title: 'Check In'
+  });
+  addWindow.loadURL(url.format({
+     pathname: path.join(__dirname, '/check-in/check-in.html'),
+     protocol:'file:',
+     slashes:true
+   }));
+   // Garbage collection
+   addWindow.on('close',()=>{
+     addWindow = null;
+   })
+}
 //Create 'Total' window
 function createAddWindowTotal(){
   addWindow = new BrowserWindow({

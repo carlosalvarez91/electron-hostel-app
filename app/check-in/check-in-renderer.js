@@ -9,15 +9,15 @@ form.addEventListener('submit', submitCheckIn);
 function submitCheckIn(e){
     e.preventDefault();
     //inputs
-    const name = document.querySelector('#name').value;
-    const surname = document.querySelector('#surname').value;
-    const room = document.querySelector('#room').value;
-    const heads = document.querySelector('#heads').value;
-    const nights = document.querySelector('#nights').value;
-    const price = document.querySelector('#price').value;
-    const payment = document.querySelector('#payment').value;
-    const date = moment().subtract(10, 'days').calendar();//Date
-    const hour = moment().format('LTS');//Hour
+    let name = document.querySelector('#name').value;
+    let surname = document.querySelector('#surname').value;
+    let room = document.querySelector('#room').value;
+    let heads = document.querySelector('#heads').value;
+    let nights = document.querySelector('#nights').value;
+    let price = document.querySelector('#price').value;
+    let payment = document.querySelector('#payment').value;
+    let date = moment().subtract(10, 'days').calendar();//Date
+    let hour = moment().format('LTS');//Hour
 
     
     //if no value
