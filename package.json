@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "electron": "^1.7.9",
+    "electron-packager": "^10.1.0",
     "moment": "^2.20.1",
     "sqlite3": "^3.1.13"
   },

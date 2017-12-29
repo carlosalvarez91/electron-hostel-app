@@ -18,38 +18,6 @@ function login(e){
     console.log('Write your name madafakaa!!')
   }
 }
-//logout
-function logout(e){
-  document.getElementById('loginScreen').style.display = 'block';
-  ipcRenderer.send('logout', (e));//destroy receptionist var
- //destroy table
-  var Parent = document.getElementById('tableAll');//destroy table
-  Parent.parentNode.removeChild(Parent);
-
-  //create new table
-  //Build an array containing Title records.
-  var titles = new Array();
-  titles.push(["Date", "Hour","Name", "Surname","Room","Heads","Nights","Price","Payment"]);
-
-  //Create a HTML Table element.
-  var table = document.createElement("TABLE");
-
-  //Get the count of columns.
-  var columnCount = titles[0].length;
-
-  //Add the header row.
-  var row = table.insertRow(-1);
-  for (var i = 0; i < columnCount; i++) {
-      var headerCell = document.createElement("TH");
-      headerCell.innerHTML = titles[0][i];
-      row.appendChild(headerCell);
-  }
-  var dvTable = document.getElementById("newTable");
-  dvTable.innerHTML = "";
-  dvTable.appendChild(table);
-  //set id to table
-  table.setAttribute("id", "tableAll");
-}
 //render the checkIn input data into a table
 ipcRenderer.on('check-in-input',(e,{date,hour, name, surname, room, heads, nights, price, payment})=>{
   var newRow = `<tr>
